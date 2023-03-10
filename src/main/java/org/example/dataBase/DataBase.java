@@ -16,7 +16,37 @@ public class DataBase {
         }
     }
     public static void initTable(){
-
+      String users = "create table if not exists users(" +
+              "id serial primary key," +
+              "name varchar(25) not null," +
+              "surname varchar(25) not null," +
+              "phone varchar(13) not null," +
+              "createdDate timestamp not null," +
+              "role varchar(25) not null," +
+              "visible boolean not null" +
+              ")";
+      String books ="create table if not exists books(" +
+              "id serial primary key," +
+              "title varchar(25) not null," +
+              "author varchar(25) not null," +
+              "publishYear varchar(4) not null," +
+              "amount integer not null," +
+              "visible boolean not null" +
+              ")";
+      String studentBook = "create table if not exists student_books(" +
+              "id serial primary key," +
+              "student_id integer not null," +
+              "book_id integer not null," +
+              "createdDate timestamp not null," +
+              "status varchar(25) not null," +
+              "returnedDate timestamp not null," +
+              "duration integer not null," +
+              "foreign key(book_id) references books(id)," +
+              "foreign key(student_id) references users(id)" +
+              ")";
+      execute(users);
+      execute(books);
+      execute(studentBook);
     }
     private static  void execute(String sql){
         try(Connection connection = getConnection()){
