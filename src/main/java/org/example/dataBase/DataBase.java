@@ -37,13 +37,20 @@ public class DataBase {
               "id serial primary key," +
               "student_id integer not null," +
               "book_id integer not null," +
-              "createdDate timestamp not null," +
+              "createdDate timestamp ," +
               "status varchar(25) not null," +
-              "returnedDate timestamp not null," +
+              "returnedDate timestamp ," +
               "duration integer not null," +
               "foreign key(book_id) references books(id)," +
               "foreign key(student_id) references users(id)" +
               ")";
+      String request = "create table if not exists requests(" +
+              " id serial primary key," +
+              " student_id integer not null," +
+              " bookTitle varchar(25) not null," +
+              " foreign key(student_id) references users(id)" +
+              ")";
+      execute(request);
       execute(users);
       execute(books);
       execute(studentBook);

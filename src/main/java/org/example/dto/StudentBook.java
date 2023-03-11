@@ -78,6 +78,6 @@ public class StudentBook {
                 ", createdDate=" + createdDate +
                 ", status=" + status +
                 ", returnedDate=" + returnedDate +
-                ", duration='" + duration ;
+                ", duration=" + duration ;
     }
 }

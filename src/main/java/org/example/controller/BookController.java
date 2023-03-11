@@ -1,19 +1,17 @@
 package org.example.controller;
 
 import org.example.dto.Book;
-import org.example.dto.User;
 import org.example.service.BookService;
 import org.example.service.NumScanner;
-import org.example.service.StringScanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.Scanner;
 
 @Controller
 public class BookController {
     @Autowired
     private NumScanner numScanner;
-    @Autowired
-    private StringScanner stringScanner;
     @Autowired
     private BookService bookService;
     public void start() {
@@ -42,12 +40,13 @@ public class BookController {
     }
 
     private void addBook() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter title:");
-        String title = stringScanner.getStringScanner().nextLine();
+        String title = scanner.nextLine();
         System.out.println("Enter author:");
-        String author = stringScanner.getStringScanner().nextLine();
+        String author = scanner.nextLine();
         System.out.println("Enter publishedYear:");
-        String publishedYear = stringScanner.getStringScanner().nextLine();
+        String publishedYear = scanner.nextLine();
         System.out.println("Enter amount");
         Integer amount = numScanner.getNumScanner().nextInt();
 

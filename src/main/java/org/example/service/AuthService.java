@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.container.ComponentContainer;
 import org.example.controller.AdminController;
 import org.example.controller.UserController;
 import org.example.dto.User;
@@ -24,6 +25,7 @@ public class AuthService {
         } else if (user.getRole().equals(Role.ADMIN)) {
             adminController.start();
         } else if (user.getRole().equals(Role.STUDENT)) {
+            ComponentContainer.user = user;
             userController.start();
         }
     }
