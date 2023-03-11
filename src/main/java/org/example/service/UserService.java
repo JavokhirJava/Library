@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.container.ComponentContainer;
 import org.example.dto.Book;
+import org.example.dto.Request;
 import org.example.dto.StudentBook;
 import org.example.dto.User;
 import org.example.repository.BookRepository;
@@ -118,7 +119,10 @@ public class UserService {
         if (book !=null){
             System.out.println("this book is exist in our library");
         }else {
-            requestRepository.addRequest(ComponentContainer.user.getId(),title);
+            Request request = new Request();
+            request.setStudent_id(ComponentContainer.user.getId());
+            request.setBookTitle(title);
+            requestRepository.addRequest(request);
             System.out.println("Your request is successfully taken");
         }
     }

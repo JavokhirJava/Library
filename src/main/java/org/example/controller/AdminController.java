@@ -12,8 +12,6 @@ public class AdminController {
     @Autowired
     private NumScanner numScanner;
     @Autowired
-    private StringScanner stringScanner;
-    @Autowired
     private AdminService adminService;
     @Autowired
     private BookController bookController;
@@ -27,9 +25,14 @@ public class AdminController {
                 case 2 -> studentMenu();
                 case 3 -> takenBooks();
                 case 4 -> takenHistory();
+                case 5 -> bookRequests();
                 default -> b=false;
             }
         }
+    }
+
+    private void bookRequests() {
+        adminService.requests();
     }
 
     private void studentMenu() {
@@ -53,6 +56,7 @@ public class AdminController {
         System.out.println("2.Student Menu");
         System.out.println("3.Student Taken Book");
         System.out.println("4.BookTaken History");
+        System.out.println("5.Requests");
         System.out.println("Choose :");
         return numScanner.getNumScanner().nextInt();
     }

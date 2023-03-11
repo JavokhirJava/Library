@@ -2,9 +2,11 @@ package org.example.service;
 
 
 import org.example.dto.Book;
+import org.example.dto.Request;
 import org.example.dto.StudentBook;
 import org.example.dto.User;
 import org.example.repository.BookRepository;
+import org.example.repository.RequestRepository;
 import org.example.repository.TakenBooksRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class AdminService {
     UserRepository userRepository;
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    RequestRepository requestRepository;
 
     public void takenBooks() {
         LinkedList<StudentBook> studentBooks = takenBooksRepository.takenBooksAdmin();
@@ -45,5 +49,9 @@ public class AdminService {
                     " BookTitle-"+book.getTitle()+" BookAuthor-"+book.getAuthor()+" BookStatus-"+studentBook.getStatus()+
                     " TakenDate-"+studentBook.getCreatedDate());
         }
+    }
+
+    public void requests() {
+        requestRepository.requestList().forEach(System.out::println);
     }
 }
