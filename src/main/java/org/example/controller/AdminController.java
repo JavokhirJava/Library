@@ -41,10 +41,11 @@ public class AdminController {
     }
 
     private void takenHistory() {
+        adminService.takeHistory();
     }
 
     private void takenBooks() {
-
+     adminService.takenBooks();
     }
 
     private Integer menu() {

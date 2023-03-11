@@ -41,6 +41,32 @@ public class TakenBooksRepository {
             throw new RuntimeException(e);
         }
     }
+    public LinkedList<StudentBook> takeListForAdmin() {
+        LinkedList<StudentBook> studentBooks = new LinkedList<>();
+        Connection connection = null;
+        try {
+            connection = DataBase.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = String.format("Select * from student_books;");
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                StudentBook studentBook = new StudentBook();
+                studentBook.setId(resultSet.getInt("id"));
+                studentBook.setStudent_id(resultSet.getInt("student_id"));
+                studentBook.setBook_id(resultSet.getInt("book_id"));
+                studentBook.setCreatedDate(resultSet.getTimestamp("createdDate").toLocalDateTime());
+                studentBook.setStatus(BookStatus.valueOf(resultSet.getString("status")));
+                studentBook.setReturnedDate(resultSet.getTimestamp("returnedDate").toLocalDateTime());
+                studentBook.setDuration(resultSet.getString("duration"));
+                studentBooks.add(studentBook);
+            }
+            connection.close();
+            return studentBooks;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public StudentBook takeByStudentAndBookId(Integer student_id,Integer book_id) {
         Connection connection = null;
         try {
@@ -131,6 +157,32 @@ public class TakenBooksRepository {
             connection = DataBase.getConnection();
             Statement statement = connection.createStatement();
             String sql = String.format("Select * from student_books where student_id ='%s' and status ='TAKEN';", id);
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                StudentBook studentBook = new StudentBook();
+                studentBook.setId(resultSet.getInt("id"));
+                studentBook.setStudent_id(resultSet.getInt("student_id"));
+                studentBook.setBook_id(resultSet.getInt("book_id"));
+                studentBook.setCreatedDate(resultSet.getTimestamp("createdDate").toLocalDateTime());
+                studentBook.setStatus(BookStatus.valueOf(resultSet.getString("status")));
+                studentBook.setReturnedDate(resultSet.getTimestamp("returnedDate").toLocalDateTime());
+                studentBook.setDuration(resultSet.getString("duration"));
+                studentBooks.add(studentBook);
+            }
+            connection.close();
+            return studentBooks;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public LinkedList<StudentBook> takenBooksAdmin() {
+        LinkedList<StudentBook> studentBooks = new LinkedList<>();
+        Connection connection = null;
+        try {
+            connection = DataBase.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = String.format("Select * from student_books where status ='TAKEN';");
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
