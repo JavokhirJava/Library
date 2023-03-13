@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 @Service
@@ -27,7 +28,7 @@ public class AdminService {
     RequestRepository requestRepository;
 
     public void takenBooks() {
-        LinkedList<StudentBook> studentBooks = takenBooksRepository.takenBooksAdmin();
+        List<StudentBook> studentBooks = takenBooksRepository.takenBooksAdmin();
         if (studentBooks.isEmpty()){
             System.out.println("All Books in Library");
             return;
@@ -41,7 +42,7 @@ public class AdminService {
     }
 
     public void takeHistory() {
-        LinkedList<StudentBook> studentBookList= takenBooksRepository.takeListForAdmin();
+        List<StudentBook> studentBookList= takenBooksRepository.takeListForAdmin();
         for (StudentBook studentBook : studentBookList){
             Book book = bookRepository.getBookById(studentBook.getBook_id());
             User user = userRepository.getById(studentBook.getStudent_id());

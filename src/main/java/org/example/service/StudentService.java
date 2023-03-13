@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -23,7 +24,7 @@ public class StudentService {
     }
 
     public void studentList() {
-        LinkedList<User> users = userRepository.getStudentList();
+        List<User> users = userRepository.getStudentList();
         for (User user : users){
             System.out.println(user);
         }
@@ -31,6 +32,10 @@ public class StudentService {
 
     public void deleteStudent(Integer id) {
         User user = userRepository.getById(id);
+        if (user==null){
+            System.out.println("User not found");
+            return;
+        }
         if(!user.getRole().equals(Role.ADMIN)){
             userRepository.deleteStudent(id);
             System.out.println("Student deleted successfully");
@@ -41,6 +46,10 @@ public class StudentService {
 
     public void activateStudent(Integer id) {
         User user = userRepository.getById(id);
+        if (user==null){
+            System.out.println("User not found");
+            return;
+        }
         if(!user.getRole().equals(Role.ADMIN)){
             userRepository.studentActivation(id);
             System.out.println("Student activated successfully");

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -29,7 +30,7 @@ public class UserService {
             System.out.println("Your book list is empty!");
             return;
         }
-        LinkedList<StudentBook> studentBooks = takenBooksRepository.takeByStudentId(user.getId());
+        List<StudentBook> studentBooks = takenBooksRepository.takeByStudentId(user.getId());
         for (StudentBook studentBook : studentBooks){
             Book book = bookRepository.getBookById(studentBook.getBook_id());
             System.out.println("OrderNum-"+studentBook.getId()+" Title-"+book.getTitle()+" Author-"+book.getAuthor());
@@ -39,9 +40,8 @@ public class UserService {
 
     public void takeBook(Integer id, Integer duration) {
         int count = 0;
-        LinkedList<StudentBook> studentBookList = takenBooksRepository.takeByStudentId(ComponentContainer.user.getId());
-        LinkedList<StudentBook> books = takenBooksRepository.takenBooks(ComponentContainer.user.getId());
-
+        List<StudentBook> studentBookList = takenBooksRepository.takeByStudentId(ComponentContainer.user.getId());
+        List<StudentBook> books = takenBooksRepository.takenBooks(ComponentContainer.user.getId());
         Book book = bookRepository.getBookById(id);
         for (StudentBook studentBook : studentBookList) {
             count++;
@@ -71,7 +71,7 @@ public class UserService {
 
     public void takenBooks() {
         User user = ComponentContainer.user;
-        LinkedList<StudentBook> takenBooks = takenBooksRepository.takenBooks(user.getId());
+        List<StudentBook> takenBooks = takenBooksRepository.takenBooks(user.getId());
         if (takenBooks.isEmpty()) {
             System.out.println("You didn't get  any book yet");
             return;
@@ -85,7 +85,7 @@ public class UserService {
 
     public void returnBook(Integer id) {
         User user = ComponentContainer.user;
-        LinkedList<StudentBook> takenBooks = takenBooksRepository.takenBooks(user.getId());
+        List<StudentBook> takenBooks = takenBooksRepository.takenBooks(user.getId());
         Boolean b = true;
         for (StudentBook studentBook : takenBooks) {
             if (!Objects.equals(studentBook.getBook_id(), id)) {
@@ -106,7 +106,7 @@ public class UserService {
     }
 
     public void history() {
-        LinkedList<StudentBook> studentBooks = takenBooksRepository.takeByStudentId(ComponentContainer.user.getId());
+        List<StudentBook> studentBooks = takenBooksRepository.takeByStudentId(ComponentContainer.user.getId());
         for (StudentBook studentBook : studentBooks){
             Book book = bookRepository.getBookById(studentBook.getBook_id());
             System.out.println("OrderNum-"+studentBook.getId()+" BookTitle-"+book.getTitle()+" BookAuthor-"+book.getAuthor()+
