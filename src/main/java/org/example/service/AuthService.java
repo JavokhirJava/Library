@@ -26,7 +26,11 @@ public class AuthService {
             adminController.start();
         } else if (user.getRole().equals(Role.STUDENT)) {
             ComponentContainer.user = user;
-            userController.start();
+            if(userRepository.getById(user.getId()).getVisible()) {
+                userController.start();
+            }else {
+                System.out.println("Your account has been blocked, please contact your administrator!!!");
+            }
         }
     }
 }

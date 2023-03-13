@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.container.ComponentContainer;
+import org.example.dto.Book;
 import org.example.repository.BookRepository;
 import org.example.repository.TakenBooksRepository;
 import org.example.service.NumScanner;
@@ -64,7 +65,7 @@ public class UserController {
     }
 
     private void takeBook() {
-        bookRepository.getBookList().forEach(System.out::println);
+        bookRepository.getBookList().stream().filter(Book::getVisible).forEach(System.out::println);
         System.out.println("Enter Book id:");
         Integer id = numScanner.getNumScanner().nextInt();
         System.out.println("Enter duration of taking book");

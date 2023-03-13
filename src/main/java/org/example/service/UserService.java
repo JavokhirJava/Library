@@ -52,13 +52,14 @@ public class UserService {
                 return;
             }
         }
-
         if (count == 5) {
             System.out.println("Limit of taking books is 5 please return some books");
         } else if (book == null) {
-            System.out.println("Book is not exists in library wrong id");
-        } else if (book.getAmount() == 0) {
-            System.out.println("Sorry,the library doesn't have this book left , you can order this book!");
+            System.out.println("Book does not exist in library invalid ID");
+        } else if (!book.getVisible()){
+            System.out.println("This book has been deleted by the admin, you can not take this book!");
+        }else if (book.getAmount() == 0) {
+            System.out.println("Unfortunately, this book is no longer in the library, but you can order this book!");
         } else {
             StudentBook studentBook = new StudentBook();
             studentBook.setStudent_id(ComponentContainer.user.getId());
