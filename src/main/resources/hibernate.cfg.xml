@@ -11,7 +11,10 @@
         <property name="show_sql">true</property>
 
         <!-- MAPPINGS -->
-<!--        <mapping class="org.example.entity.EmployeeEntity"/>-->
+        <mapping class="org.example.dto.User"/>
+        <mapping class="org.example.dto.StudentBook"/>
+        <mapping class="org.example.dto.Request"/>
+        <mapping class="org.example.dto.Book"/>
     </session-factory>
 
 </hibernate-configuration>

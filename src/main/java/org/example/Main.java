@@ -31,5 +31,8 @@ public class Main {
 
         Session session = factory.openSession();
         Transaction transaction = session.beginTransaction();
+
+        factory.close();
+        session.close();
     }
 }
