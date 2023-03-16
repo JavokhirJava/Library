@@ -1,8 +1,13 @@
 package org.example.dto;
 
+import javax.persistence.*;
+
+@Table
 public class Request {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer student_id;
+    @Column(name = "booktitle")
     private String bookTitle;
 
     public Integer getId() {

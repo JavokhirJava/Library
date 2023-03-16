@@ -1,13 +1,20 @@
 package org.example.dto;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Table(name = "books")
 public class Book {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "author")
     private String author;
+    @Column(name = "publishyear")
     private String publishYear;
+    @Column(name = "amount")
     private Integer amount;
+    @Column(name = "visible")
     private  Boolean visible;
 
     public Integer getId() {

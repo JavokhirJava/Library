@@ -2,10 +2,15 @@ package org.example.dto;
 
 import org.example.enums.BookStatus;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+@Table
 public class StudentBook {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
     private Integer student_id;
     private Integer book_id;
